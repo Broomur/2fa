@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "db": "docker run -d --rm --name mongo -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=St34m_P1n34ppl3 -e MONGO_INITDB_ROOT_PASSWORD=M4gn1f1c3nt_L1tch1 mongo:latest",
+    "populate": "node ./models/db_populate.js"
   },
   "keywords": [],
   "author": "",
