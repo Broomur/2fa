@@ -30,7 +30,7 @@ const db_populate = async () => {
     const db_Materials = await Materials.find();
 
     const furniture = [
-        {name: "maSuperEtagère", category: "étagère", materials: [db_Materials[0], db_Materials[4]], description: "Elle est belle mon étagère !", price: 240, quantity: 2}
+        {name: "maSuperEtagère", category: "étagère", materials: ["frêne", "acier"], description: "Elle est belle mon étagère !", price: 240, quantity: 2}
     ];
 
     await Furniture.create(furniture);

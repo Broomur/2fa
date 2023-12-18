@@ -1,5 +1,4 @@
 import mongoose from "./index.js";
-import Materials from "./Materials.js";
 
 const Schema = mongoose.Schema;
 
@@ -14,7 +13,8 @@ const Furniture = mongoose.model("Furniture", new mongoose.Schema({
         required: true
     },
     materials: {
-        type: [Schema.Types.ObjectId],
+        type: [String],
+        enum: ["chêne", "frêne", "noyer", "acier", "inox", "aluminium", "plastique"],
         ref: "Materials",
         required: true
     },
