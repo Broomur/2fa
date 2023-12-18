@@ -19,7 +19,7 @@ const AuthController = async (req, res) => {
             if (!email || !password) {
                 res.json({ message: "missing email or password" });
             } else if (email && password) {
-                const user = await User.findOne({email: email});    
+                const user = await User.findOne({email: email});
                 if (user) {
                     const hashPassword = user.password;
                     const match = await argon2.verify(hashPassword, password);
