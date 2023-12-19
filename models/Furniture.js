@@ -13,9 +13,10 @@ const Furniture = mongoose.model("Furniture", new mongoose.Schema({
         required: true
     },
     materials: {
-        type: [String],
-        enum: ["chêne", "frêne", "noyer", "acier", "inox", "aluminium", "plastique"],
-        ref: "Materials",
+        type: [{
+            id: {type: Schema.Types.ObjectId, ref: "Materials", required: true},
+            quantity: {type: Number, required: false, default: 0},
+        }],
         required: true
     },
     description: {

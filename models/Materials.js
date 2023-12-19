@@ -9,10 +9,6 @@ const Materials = mongoose.model("Materials", new mongoose.Schema({
         type: String,
         required: true
     },
-    quantity: {
-        type: Number,
-        required: false
-    },
     provider: {
         type: String,
         required: true

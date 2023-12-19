@@ -6,7 +6,7 @@ const furnitureRoutes = express.Router();
 
 furnitureRoutes.get("/furniture", FurnitureController);
 furnitureRoutes.post("/furniture", TokenVerifyMiddleware, FurnitureController);
-furnitureRoutes.put("/furniture", TokenVerifyMiddleware, FurnitureController);
-furnitureRoutes.delete("/furniture", TokenVerifyMiddleware, FurnitureController);
+furnitureRoutes.put("/furniture/:id", TokenVerifyMiddleware, FurnitureController);
+furnitureRoutes.delete("/furniture/:id", TokenVerifyMiddleware, FurnitureController);
 
 export default furnitureRoutes;
