@@ -1,23 +1,34 @@
-import mongoose from "./index.js";
+import sequelize from "./index.js";
+import { DataTypes } from "sequelize";
 
-const Materials = mongoose.model("Materials", new mongoose.Schema({
+const Material = sequelize.define("materials", {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.BIGINT,
+        allowNull: false,
+    },
     name: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     category: {
-        type: String,
-        required: true
+        type: DataTypes.ENUM(["wood", "metal", "plastic"]),
+        allowNull: false,
     },
     provider: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     price: {
-        type: Number,
-        required: false,
-        default: 0
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
     }
-}));
+});
 
-export default Materials;
+export default Material;

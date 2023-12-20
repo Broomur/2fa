@@ -1,46 +1,44 @@
-import mongoose from "./index.js";
+import sequelize from "./index.js";
+import { DataTypes, Sequelize } from "sequelize";
 
-const Schema = mongoose.Schema;
-
-const Furniture = mongoose.model("Furniture", new mongoose.Schema({
+const Furniture = sequelize.define("furniture", {
+    id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.BIGINT,
+        allowNull: false,
+    },
     name: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     category: {
-        type: String,
-        enum: ["étagère", "armoire"],
-        required: true
-    },
-    materials: {
-        type: [{
-            id: {type: Schema.Types.ObjectId, ref: "Materials", required: true},
-            quantity: {type: Number, required: false, default: 0},
-        }],
-        required: true
+        type: DataTypes.ENUM(["shelter", "cupboard"]),
+        allowNull: false,
     },
     description: {
-        type: String,
-        required: true
+        type: DataTypes.TEXT,
+        allowNull: true,
     },
     pictures: {
-        type: [String],
-        required: false
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
     },
     price: {
-        type: Number,
-        required: true
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
     },
     quantity: {
-        type: Number,
-        required: true,
-        default: 0
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
     },
     date: {
-        type: Date,
+        type: DataTypes.DATE,
         required: true,
-        default: new Date().toDateString()
+        defaultValue: Sequelize.NOW
     }
-}));
+});
 
 export default Furniture;

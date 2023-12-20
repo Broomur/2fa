@@ -6,5 +6,6 @@ const materialsRoutes = express.Router();
 
 materialsRoutes.all("/materials/:id", TokenVerifyMiddleware, MaterialsController);
 materialsRoutes.all("/materials", TokenVerifyMiddleware, MaterialsController);
+materialsRoutes.get("/materials/count", TokenVerifyMiddleware, MaterialsController);
 
 export default materialsRoutes;

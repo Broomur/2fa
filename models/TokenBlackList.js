@@ -1,10 +1,13 @@
-import mongoose from "./index.js";
+import sequelize from "./index.js";
+import { DataTypes, Sequelize } from "sequelize";
 
-const TokenBlackList = mongoose.model("TokenBlackList", new mongoose.Schema({
+const TokenBlackList = sequelize.define("blacklist", {
     token: {
-        type: String,
-        required: true
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.STRING,
+        allowNull: false,
     }
-}));
+})
 
 export default TokenBlackList;

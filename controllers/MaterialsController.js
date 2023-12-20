@@ -3,22 +3,26 @@ import Materials from "../models/Materials.js";
 
 const MaterialsController = async (req, res) => {
     if (req.method === "GET") {
-        const materials = await Furniture.aggregate([
-            { $unwind: "$materials" },
-            { $group: { _id: "$materials", count: { $sum: 1 } } },
-            { $lookup: {
+        if (req.path === "/materials") {
+            const materials = await Materials.find();
+            res.json({ materials });
+        } else if (req.path === "/materials/count") {
+            const materials = await Furniture.aggregate([
+            { $unwind: "$components" },
+            { $group: { _id: "$components.material", count: { $sum: "$components.quantity" } } },
+            /* { $lookup: {
                 from: "materials",
-                localField: "_id",
+                localField: "material",
                 foreignField: "_id",
                 as: "materialDetails",
                 },
             },
             { $project: {
                     _id: 0,
-                    name: { $arrayElemAt: ["$materialDetails.name", 0] },
+                    name: "$materialDetails",
                     count: 1,
                 },
-            },
+            }, */
         ]);
 
         (await Materials.find().select("name"))
@@ -26,10 +30,12 @@ const MaterialsController = async (req, res) => {
             .filter(elem => {
                 return materials.every(mat => mat.name !== elem);
             })
-            .forEach(elem => materials.push({ count: 0, name: elem }));
+            //.forEach(elem => materials.push({ count: 0, name: elem }));
 
 
         res.json({ materials });
+        }
+        
           
           
     } else if (req.method === "POST") {

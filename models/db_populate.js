@@ -1,39 +1,56 @@
 import User from "./User.js";
 import Materials from "./Materials.js";
-import * as argon2 from "argon2";
 import Furniture from "./Furniture.js";
+import * as argon2 from "argon2";
+import sequelize from "./index.js";
 
-const db_populate = async () => {
-    await User.deleteMany({});
-    await Materials.deleteMany({});
-    await Furniture.deleteMany({});
+const dbPopulate = async () => {
+  try {
+    await sequelize.sync({ force: true });
+
+    await User.destroy({ where: {} });
+    await Materials.destroy({ where: {} });
+    await Furniture.destroy({ where: {} });
+
     const hashedPassword = await argon2.hash("password");
     const user = {
-        email: "admin@email.com",
-        password: hashedPassword
+      email: "admin@email.com",
+      password: hashedPassword
     };
-    
-    await User.create(user);
+
+    const createdUser = await User.create(user);
 
     const materials = [
-        {name: "frêne", category: "bois", provider: "BBois"},
-        {name: "chêne", category: "bois", provider: "BBois"},
-        {name: "noyer", category: "bois", provider: "BBois"},
-        {name: "acier", category: "metal", provider: "MetaLo"},
-        {name: "inox", category: "metal", provider: "MetaLo"},
-        {name: "aluminium", category: "metal", provider: "MetaLo"},
-        {name: "plastique", category: "plastique", provider: "pPlastique"}
+      { name: "frêne", category: "wood", provider: "BBois" },
+      { name: "chêne", category: "wood", provider: "BBois" },
+      { name: "noyer", category: "wood", provider: "BBois" },
+      { name: "acier", category: "metal", provider: "MetaLo" },
+      { name: "inox", category: "metal", provider: "MetaLo" },
+      { name: "aluminium", category: "metal", provider: "MetaLo" },
+      { name: "plastique", category: "plastic", provider: "pPlastique" }
     ];
-
-    await Materials.create(materials);
-
-    const db_Materials = await Materials.find();
+    const createdMaterials = await Materials.bulkCreate(materials);
 
     const furniture = [
-        {name: "maSuperEtagère", category: "étagère", materials: [{id: db_Materials[0].id, quantity: 2}, {id: db_Materials[3].id, quantity: 3}], description: "Elle est belle mon étagère !", price: 240, quantity: 2}
+      {
+        name: "maSuperEtagère",
+        category: "shelter",
+        description: "Elle est belle mon étagère !",
+        price: 240,
+        quantity: 2,
+      }
+    ];
+    
+    const createdFurniture = await Furniture.bulkCreate(furniture);
+
+    const components = [
+      { MaterialId: createdMaterials[0].id, FurnitureId: createdFurniture[0].id, quantity: 2 },
+      { MaterialId: createdMaterials[3].id, FurnitureId: createdFurniture[0].id, quantity: 3 }
     ];
 
-    await Furniture.create(furniture);
-}
+  } catch (error) {
+    console.error('Erreur lors de la création des enregistrements', error);
+  }
+};
 
-db_populate();
+dbPopulate();
