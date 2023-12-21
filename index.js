@@ -13,7 +13,7 @@ const { SERVER_HOST, SERVER_PORT } = process.env;
 const corsOptions = {
     origin: "http://localhost:4200",
     credentials: true,
-    methods: "GET, HEAD? PUT, PATCH, POST, DELETE",
+    methods: "GET, HEAD, OPTION, PUT, PATCH, POST, DELETE",
     optionSuccessStatus: 204,
 }
 
