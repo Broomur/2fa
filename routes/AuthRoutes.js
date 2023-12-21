@@ -6,5 +6,6 @@ const authRoutes = express.Router();
 
 authRoutes.post("/login", AuthController);
 authRoutes.get("/logout", TokenVerifyMiddleWare, AuthController);
+authRoutes.get("/me", TokenVerifyMiddleWare, AuthController);   
 
 export default authRoutes;

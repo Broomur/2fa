@@ -12,6 +12,8 @@ const AuthController = async (req, res) => {
             const token = req.cookies.access;
             TokenBlackList.create({token: token});
             res.json({ message: "logout" });
+        } else if (req.path === "/me") {
+            res.json({ message: true });
         }
     } else if (req.method === "POST") {
         if (req.path === "/login") {
