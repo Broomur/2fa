@@ -65,29 +65,11 @@ const dbPopulate = async () => {
             components
         );
 
-        const furnitureData = await Furniture.findOne({
-            where: { name: "maSuperEtagère" },
-            include: Material,
-        });
-		const formattedData = {
-			name: furnitureData.name,
-			id: furnitureData.id,
-			category: furnitureData.category,
-			description: furnitureData.description,
-			price: furnitureData.price,
-			quantity: furnitureData.quantity,
-			date: furnitureData.date,
-			materials: furnitureData.materials.map(material => ({
-			  name: material.name,
-			  type: material.category,
-			  id: material.id,
-			  provider: material.provider,
-			  price: material.price,
-			  description: material.description,
-			  quantity: material['furniture-material'].quantity,
-			})),
-		  };
-        console.log(formattedData);
+
+        console.log("Contraintes appliquées avec succès !");
+        process.exit(0);
+		
+
     } catch (error) {
         console.error("Erreur lors de la création des enregistrements", error);
     }
