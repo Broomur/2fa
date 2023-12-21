@@ -11,7 +11,7 @@ dotenv.config();
 const { SERVER_HOST, SERVER_PORT } = process.env;
 
 const corsOptions = {
-    origin: "http://127.0.0.1:4200",
+    origin: "http://localhost:4200",
     credentials: true,
     methods: "GET, HEAD? PUT, PATCH, POST, DELETE",
     optionSuccessStatus: 204,
