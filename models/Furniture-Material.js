@@ -1,5 +1,3 @@
-import Furniture from "./Furniture.js";
-import Material from "./Materials.js";
 import sequelize from "./index.js";
 import { DataTypes } from "sequelize";
 
