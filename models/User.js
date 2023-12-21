@@ -1,7 +1,7 @@
 import sequelize from "./index.js";
 import { DataTypes } from "sequelize";
 
-const User = sequelize.define('authentication_user', {
+const User = sequelize.define('user', {
     id: {
         primaryKey: true,
         autoIncrement: true,
@@ -17,7 +17,7 @@ const User = sequelize.define('authentication_user', {
         allowNull: false,
     }
 }, {
-    tableName: 'authentication_user',
+    tableName: 'users',
 })
 
 export default User;

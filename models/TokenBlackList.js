@@ -1,13 +1,14 @@
 import sequelize from "./index.js";
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 
-const TokenBlackList = sequelize.define("blacklist", {
+const TokenBlackList = sequelize.define("token-blacklist", {
     token: {
         primaryKey: true,
-        autoIncrement: true,
         type: DataTypes.STRING,
         allowNull: false,
     }
+}, {
+    tableName: "tokenBlacklist"
 })
 
 export default TokenBlackList;

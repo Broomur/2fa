@@ -10,8 +10,8 @@ const TokenVerifyMiddleware = async (req, res, next) => {
         } catch (error) {
             res.status(401).json({ message: "unauthorized" });
         }
-        const isBlackListed = await TokenBlackList.find({ token: req.cookies.access });
-        if (isBlackListed.length) res.status(401).json({ message: "unauthorized" });
+        const isBlackListed = await TokenBlackList.findOne({ where: { token: req.cookies.access } });
+        if (isBlackListed !== null) res.status(401).json({ message: "unauthorized" });
         else next();
     }
     else {

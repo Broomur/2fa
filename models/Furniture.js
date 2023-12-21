@@ -13,7 +13,7 @@ const Furniture = sequelize.define("furniture", {
         allowNull: false,
     },
     category: {
-        type: DataTypes.ENUM(["shelter", "cupboard"]),
+        type: DataTypes.ENUM(["shelf", "cupboard"]),
         allowNull: false,
     },
     description: {
@@ -39,6 +39,10 @@ const Furniture = sequelize.define("furniture", {
         required: true,
         defaultValue: Sequelize.NOW
     }
+}, {
+    tableName: "furnitures"
 });
+
+
 
 export default Furniture;
