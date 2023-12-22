@@ -18,6 +18,10 @@ const MaterialsController = async (req, res) => {
                         fn("SUM", col("furniture-materials.quantity")),
                         "totalQuantity",
                     ],
+                    [
+                        fn("ARRAY_AGG", col("furniture-materials.furnitureId")),
+                        "furnitureIds",
+                    ]
                 ],
                 include: [
                     {
