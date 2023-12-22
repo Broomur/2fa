@@ -18,8 +18,6 @@ const AuthController = async (req, res) => {
     } else if (req.method === "POST") {
         if (req.path === "/login") {
             const { email, password } = req.body;
-            console.log("email", email);
-            console.log("password", password);
             if (!email || !password) {
                 res.status(404).json({ message: "missing email or password" });
             } else if (email && password) {
