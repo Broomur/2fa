@@ -18,8 +18,10 @@ const AuthController = async (req, res) => {
     } else if (req.method === "POST") {
         if (req.path === "/login") {
             const { email, password } = req.body;
+            console.log("email", email);
+            console.log("password", password);
             if (!email || !password) {
-                res.json({ message: "missing email or password" });
+                res.status(404).json({ message: "missing email or password" });
             } else if (email && password) {
                 const user = await User.findOne({
                     where: { email: email },
@@ -34,10 +36,10 @@ const AuthController = async (req, res) => {
                         res.cookie("access", token, { httpOnly: true, sameSite: "Lax" });
                         res.json({ message: "login successful" });
                     } else {
-                        res.json({ message: "login failed" });
+                        res.status(401).json({ message: "login failed" });
                     }
                 } else {
-                    res.json({ message: "no user found" });
+                    res.status(404).json({ message: "no user found" });
                 }
             }
         }

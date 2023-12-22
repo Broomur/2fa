@@ -21,7 +21,7 @@ const Material = sequelize.define("materials", {
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     price: {

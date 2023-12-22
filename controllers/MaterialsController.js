@@ -11,6 +11,9 @@ const MaterialsController = async (req, res) => {
                     "id",
                     "name",
                     "description",
+                    "category",
+                    "provider",
+                    "price",
                     [
                         fn("SUM", col("furniture-materials.quantity")),
                         "totalQuantity",
