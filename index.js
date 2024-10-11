@@ -3,8 +3,6 @@ import cors from "cors";
 import cookieParse from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/AuthRoutes.js";
-import furnitureRoutes from "./routes/FurnitureRoutes.js";
-import materialsRoutes from "./routes/MaterialsRoutes.js";
 
 dotenv.config();
 
@@ -25,8 +23,6 @@ const app = express()
 .use(cookieParse())
 .use(cors(corsOptions))
 .use(authRoutes)
-.use(furnitureRoutes)
-.use(materialsRoutes)
 .listen(SERVER_PORT, SERVER_HOST, () => {
     console.log(`Listening on http://${SERVER_HOST}:${SERVER_PORT}`);
 })

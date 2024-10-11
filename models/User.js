@@ -15,6 +15,15 @@ const User = sequelize.define('user', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    twoFactorEnabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+    twoFactorSecret: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 }, {
     tableName: 'users',
