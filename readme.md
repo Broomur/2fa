@@ -1,4 +1,4 @@
-# Artisan API (express.js + postgresql)
+# API otpauth (express.js + postgresql)
 
 ## Prérequis
 
@@ -19,10 +19,11 @@
 
 - L'API utilise l'algorithme Argon2 pour chiffrer les mots de passes en base de données.
 - Elle utilise également le JSONWebToken pour gérer les sessions des utilisateurs (un token délivré lors du login, valable 1h, non renouvelable et blacklisté lors du logout).
+- Elle utilise otpauth pour proposer une authentification à deux facteurs (avec google authenticator)
 - Elle fonctionne avec postgresql. Attention dans un cadre de développement, les données enregistrées dans l'image docker postgresql ne seront pas persistantes.
 - Elle utilise cors, cookieParser et dotenv (uniquement en développement pour ce dernier)
 - La vérification de la validité du JWToken se fait via un middleware (./middlewares/TokenVerifyMiddleware.js)
-- La logique métier se fait au sein de trois contrôleurs ./controllers/AuthController.js, ./controllers/FurnitureController.js, ./controllers/MaterialsController.js
+- La gestion logique se fait dans ./controllers/AuthController.js
 - Ces contrôleurs sont appelés dans les fichiers de routes correspondants (dans ./routes)
 - Ils font appel aux modèles situés dans le dossier ./models
 - La connexion à la base de données est instanciée dans ./models/index.js
@@ -32,9 +33,7 @@
 
 Ci-dessous, les endpoints de l'API avec les méthodes supportées. Les méthodes en italique sont privées et soumises à vérification du JWToken.
 
-- /login [ POST ]
+- /login [ *POST* ]
 - /logout [ *GET* ]
-- furniture [ GET, *POST*, *PUT*, *DELETE* ]
-- furniture/:category [ GET ]
-- /furniture?material[ &material ... ] [ GET ]
-- /materials [ GET ]
+- /me [ *GET* ]
+- /enable-2fa [ *GET* ]
